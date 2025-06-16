@@ -1,0 +1,5 @@
+@ObjectModel.leadingEntity.name: 'ZI_Asset_S'
+define service ZUI_ASSET {
+  expose ZI_ASSET_S as AssetAll;
+  expose ZI_ASSET as Asset;
+}

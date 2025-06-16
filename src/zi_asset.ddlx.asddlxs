@@ -1,0 +1,115 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'Asset', 
+    typeNamePlural: 'Assets', 
+    title: {
+      type: #STANDARD, 
+      label: 'Table for Asset Creation', 
+      value: 'ZzPbukr'
+    }
+  }
+}
+annotate view ZI_Asset with
+{
+  @UI.identification: [ {
+    position: 1 
+  } ]
+  @UI.lineItem: [ {
+    position: 1 
+  }, 
+  {
+    type: #FOR_ACTION, 
+    dataAction: 'CopyAsset', 
+    label: 'Copy Selected Entry', 
+    invocationGrouping: #CHANGE_SET
+  } ]
+  @UI.facet: [ {
+    id: 'ZI_Asset', 
+    purpose: #STANDARD, 
+    type: #IDENTIFICATION_REFERENCE, 
+    label: 'Table for Asset Creation', 
+    position: 1 
+  } ]
+  ZzPbukr;
+  
+  @UI.identification: [ {
+    position: 2 , 
+    label: 'ExternalId'
+  } ]
+  @UI.lineItem: [ {
+    position: 2 , 
+    label: 'ExternalId'
+  } ]
+  ExternalId;
+  
+  @UI.identification: [ {
+    position: 3 , 
+    label: 'ZzProjManager'
+  } ]
+  @UI.lineItem: [ {
+    position: 3 , 
+    label: 'ZzProjManager'
+  } ]
+  ZzProjManager;
+  
+  @UI.identification: [ {
+    position: 4 , 
+    label: 'Assetclass'
+  } ]
+  @UI.lineItem: [ {
+    position: 4 , 
+    label: 'Assetclass'
+  } ]
+  Assetclass;
+  
+  @UI.identification: [ {
+    position: 5 , 
+    label: 'Assetclassdes'
+  } ]
+  @UI.lineItem: [ {
+    position: 5 , 
+    label: 'Assetclassdes'
+  } ]
+  Assetclassdes;
+  
+  @UI.identification: [ {
+    position: 6 , 
+    label: 'Aktiv'
+  } ]
+  @UI.lineItem: [ {
+    position: 6 , 
+    label: 'Aktiv'
+  } ]
+  Aktiv;
+  
+  @UI.identification: [ {
+    position: 7 , 
+    label: 'ZzKostlResp'
+  } ]
+  @UI.lineItem: [ {
+    position: 7 , 
+    label: 'ZzKostlResp'
+  } ]
+  ZzKostlResp;
+  
+  @UI.identification: [ {
+    position: 8 , 
+    label: 'Anlhtxt'
+  } ]
+  @UI.lineItem: [ {
+    position: 8 , 
+    label: 'Anlhtxt'
+  } ]
+  Anlhtxt;
+  
+  @UI.identification: [ {
+    position: 9 , 
+    label: 'ChangedBy'
+  } ]
+  @UI.lineItem: [ {
+    position: 9 , 
+    label: 'ChangedBy'
+  } ]
+  ChangedBy;
+}

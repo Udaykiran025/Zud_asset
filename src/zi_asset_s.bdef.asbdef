@@ -1,0 +1,90 @@
+managed with additional save implementation in class ZBP_I_ASSET_S unique;
+strict;
+with draft;
+define behavior for ZI_Asset_S alias AssetAll
+draft table ZASSET_D_S
+with unmanaged save
+lock master total etag LastChangedAtMax
+authorization master( global )
+
+{
+  field ( readonly )
+   SingletonID;
+
+  field ( features : instance )
+   TransportRequestID;
+
+  field ( notrigger )
+   SingletonID,
+   LastChangedAtMax;
+
+
+  update;
+  internal create;
+  internal delete;
+
+  draft action ( features : instance ) Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+  action ( features : instance ) SelectCustomizingTransptReq parameter D_SelectCustomizingTransptReqP result [1] $self;
+
+  association _Asset { create ( features : instance ); with draft; }
+
+  validation ValidateTransportRequest on save ##NOT_ASSIGNED_TO_DETACT { create; update; }
+
+  side effects {
+    action SelectCustomizingTransptReq affects $self;
+  }
+  }
+
+define behavior for ZI_Asset alias Asset ##UNMAPPED_FIELD
+persistent table ZASSET
+draft table ZASSET_D
+etag master LocalLastChangedAt
+lock dependent by _AssetAll
+authorization dependent by _AssetAll
+
+{
+  field ( mandatory : create )
+   ZzPbukr;
+
+  field ( readonly )
+   SingletonID,
+   LocalLastChangedAt,
+   ChangedAt;
+
+  field ( readonly : update )
+   ZzPbukr;
+
+  field ( notrigger )
+   SingletonID,
+   LocalLastChangedAt,
+   ChangedAt;
+
+
+  update( features : global );
+  delete( features : global );
+
+  factory action ( features : instance ) CopyAsset parameter ZD_CopyAssetP [1];
+
+  mapping for ZASSET
+  {
+    ZzPbukr = ZZ_PBUKR;
+    ExternalId = EXTERNAL_ID;
+    ZzProjManager = ZZ_PROJ_MANAGER;
+    Assetclass = ASSETCLASS;
+    Assetclassdes = ASSETCLASSDES;
+    Aktiv = AKTIV;
+    ZzKostlResp = ZZ_KOSTL_RESP;
+    Anlhtxt = ANLHTXT;
+    ChangedBy = CHANGED_BY;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+    ChangedAt = CHANGED_AT;
+  }
+
+  association _AssetAll { with draft; }
+
+  validation ValidateTransportRequest on save ##NOT_ASSIGNED_TO_DETACT { create; update; delete; }
+}
